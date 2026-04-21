@@ -3,8 +3,7 @@ import React from "react";
 const Filter = () => {
   return (
     <div>
-      <h1>Filter Activities</h1>
-      <p>Filter functionality coming soon...</p>
+      <h1>Filter </h1>
     </div>
   );
 };

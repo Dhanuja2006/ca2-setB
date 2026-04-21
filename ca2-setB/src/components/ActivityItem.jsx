@@ -16,10 +16,9 @@ const ActivityItem = ({ activity }) => {
       <p>Calories Burned: {activity.caloriesBurned}</p>
       <p>Workout Minutes: {activity.workoutMinutes}</p>
       <p>Goal Achieved: {String(goalVal)}</p>
-      <button onClick={() => toggleGoal(activity.activityID)}>
+      <button onClick={() => toggleGoal(activity.activityId)}>
         Toggle Goal
       </button>
-      <hr />
     </div>
   );
 };
