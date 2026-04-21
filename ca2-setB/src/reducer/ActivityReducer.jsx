@@ -2,7 +2,7 @@ export const initialState = {
   activities: [
     {
       activityID: "1",
-      name: "Morning Run",
+      name: "Run",
       steps: 5000,
       caloriesBurned: 350,
       workoutMinutes: 45,
@@ -27,17 +27,17 @@ export const activityReducer = (state, action) => {
       return {
         ...state,
         activities: state.activities.map((activity) => {
-          if (activity.activityID === action.payload) {
-            let newGoalStatus = !activity.goalAchieved;
-            
-            // Business logic: if steps > 8000: goalAchieved must automatically become true
-            if (activity.steps > 8000) {
+          const activityId = activity.activityID || activity.activityId;
+          if (String(activityId) === String(action.payload)) {
+            const currentGoalStatus = activity.goalAchieved !== undefined ? activity.goalAchieved : activity.goalAcheived;
+            let newGoalStatus = !currentGoalStatus;
+
+            if (Number(activity.steps) > 8000) {
               newGoalStatus = true;
             }
 
-            // Edge cases: already correct value - no duplicate update
-            if (newGoalStatus === activity.goalAchieved) {
-              return activity; // return original object
+            if (newGoalStatus === currentGoalStatus) {
+              return activity;
             }
 
             return { ...activity, goalAchieved: newGoalStatus };
@@ -49,27 +49,6 @@ export const activityReducer = (state, action) => {
       return {
         ...state,
         activities: action.payload,
-      };
-    case "ADD_ACTIVITY":
-      return {
-        ...state,
-        activities: [action.payload, ...state.activities],
-      };
-    case "DELETE_ACTIVITY":
-      return {
-        ...state,
-        activities: state.activities.filter(
-          (activity) => activity.activityID !== action.payload
-        ),
-      };
-    case "UPDATE_ACTIVITY":
-      return {
-        ...state,
-        activities: state.activities.map((activity) =>
-          activity.activityID === action.payload.activityID
-            ? action.payload
-            : activity
-        ),
       };
     default:
       return state;

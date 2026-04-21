@@ -11,15 +11,15 @@ const ActivityItem = ({ activity }) => {
   return (
     <div className="activity-item">
       <h3>{displayName}</h3>
+      <p>ID: {activity.activityID || activity.activityId}</p>
       <p>Date: {displayDate}</p>
       <p>Steps: {activity.steps}</p>
       <p>Calories Burned: {activity.caloriesBurned}</p>
       <p>Workout Minutes: {activity.workoutMinutes}</p>
       <p>Goal Achieved: {String(goalVal)}</p>
-      <button onClick={() => toggleGoal(activity.activityID)}>
+      <button onClick={() => toggleGoal(activity.activityID || activity.activityId)}>
         Toggle Goal
       </button>
-      <hr />
     </div>
   );
 };

@@ -6,10 +6,8 @@ const Activities = () => {
   const { activities } = useActivity();
 
   const validActivities = activities.filter((activity) => {
-    // The previous requirements: steps>0, caloriesBurned>0, workoutMinutes>0
-    // And goalAchieved (or goalAcheived) must be boolean
     const goalVal = activity.goalAchieved !== undefined ? activity.goalAchieved : activity.goalAcheived;
-    
+
     return (
       Number(activity.steps) > 0 &&
       Number(activity.caloriesBurned) > 0 &&
@@ -24,7 +22,7 @@ const Activities = () => {
       <p>Showing {validActivities.length} valid activities.</p>
       <div className="activities-list">
         {validActivities.map((activity) => (
-          <ActivityItem key={activity.activityID} activity={activity} />
+          <ActivityItem key={activity.activityID || activity.activityId} activity={activity} />
         ))}
       </div>
     </div>
